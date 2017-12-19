@@ -1,0 +1,8 @@
+﻿@model MusicTools.Web.ViewModels.ChordBlockViewModel
+    
+<div class="chord-block">
+    @foreach (var chord in Model.Chords)
+    {
+        <div>@chord.Name : @chord.Fundamental.ToString() - @chord.Notes.Select(n => n.ToString()).Aggregate((n1,n2) => $"{n1} - {n2}")</div>
+    }
+</div>

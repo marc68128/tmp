@@ -1,28 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using MusicTools.Domain;
-using MusicTools.Domain.Enum;
+using MusicTools.Service.Contracts;
 
 namespace MusicTools.Service
 {
-    public class ChordService
+    public class ChordService : IChordService
     {
-        private NoteService _noteService;
+        private readonly INoteService _noteService;
 
-        public ChordService(NoteService noteService = null)
+        public ChordService(INoteService noteService)
         {
-            _noteService = noteService ?? new NoteService();
+            _noteService = noteService;
         }
 
         public Chord GetChord(Note fundamental, ChordQuality chordQuality)
         {
-            return new Chord(chordQuality, fundamental, chordQuality.ChordQualityIntervals.Select(cqi => _noteService.GetByInterval(fundamental, cqi.Interval.Number, cqi.Interval.Quality)).ToArray());           
+            return new Chord(chordQuality, fundamental, chordQuality.ChordQualityIntervals.Select(cqi => _noteService.GetByInterval(fundamental, cqi.Interval)).ToArray());           
         }
 
-        public IEnumerable<Chord> GetChords(Note fundamental)
+        public IEnumerable<Chord> GetChords(Note fundamental, IEnumerable<ChordQuality> chordQualities)
         {
-            return Enum.GetValues(typeof(ChordQuality)).Cast<ChordQuality>().Select(chordQulity => GetChord(fundamental, chordQulity));
+            return chordQualities.Select(chordQuality => GetChord(fundamental, chordQuality));
         }
     }
 }

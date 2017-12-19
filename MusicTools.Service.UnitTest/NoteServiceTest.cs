@@ -12,7 +12,7 @@ namespace MusicTools.Service.UnitTest
         [SetUp]
         public void SetUp()
         {
-            _noteService = new NoteService();
+            _noteService = new NoteService(new KeyService());
         }
 
         [Test]
@@ -59,7 +59,7 @@ namespace MusicTools.Service.UnitTest
         [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.B, Alteration.Flat, Key.C, Alteration.None)]
         [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.B, Alteration.None, Key.C, Alteration.Sharp)]
         [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.B, Alteration.Sharp, Key.C, Alteration.DoubleSharp)]
-        
+
         [TestCase(IntervalNumber.Second, IntervalQuality.Diminished, Key.C, Alteration.None, Key.D, Alteration.DoubleFlat)]
         [TestCase(IntervalNumber.Second, IntervalQuality.Augmented, Key.B, Alteration.None, Key.C, Alteration.DoubleSharp)]
 
@@ -87,7 +87,7 @@ namespace MusicTools.Service.UnitTest
         [TestCase(IntervalNumber.Seventh, IntervalQuality.Augmented, Key.B, Alteration.Sharp, Key.A, Alteration.TripleSharp)]
         public void Test_GetByInterval(IntervalNumber intervalNumber, IntervalQuality intervalQuality, Key inputKey, Alteration inputAlteration, Key expectedKey, Alteration expectedAlteration)
         {
-            var result = _noteService.GetByInterval(new Note(inputKey, inputAlteration), intervalNumber, intervalQuality);
+            var result = _noteService.GetByInterval(new Note(inputKey, inputAlteration), new Interval { Number = intervalNumber, Quality = intervalQuality });
             Assert.That(result.Key, Is.EqualTo(expectedKey));
             Assert.That(result.Alteration, Is.EqualTo(expectedAlteration));
         }

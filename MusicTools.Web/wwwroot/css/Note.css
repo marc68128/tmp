@@ -1,0 +1,28 @@
+﻿.note-block {
+    width: 98%;
+    border-radius: 25px;
+    background-color: lightgray;
+    margin: 1%;
+}
+
+.note-block .note {
+    border: 1px solid transparent;
+    width: 12%;
+    float: left;
+    margin: 1%;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    height: 25px;
+    line-height: 25px;
+}
+
+    .note-block .note.selected {
+        background-color: lightblue;
+        border: 1px solid black;
+    }
+
+    .note-block .note:hover {
+        border: 1px solid black;
+        cursor: pointer; 
+    }

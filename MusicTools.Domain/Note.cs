@@ -1,4 +1,5 @@
 ﻿using MusicTools.Domain.Enum;
+using MusicTools.Domain.Utils;
 
 namespace MusicTools.Domain
 {
@@ -24,7 +25,7 @@ namespace MusicTools.Domain
         {
             if (Alteration == Alteration.None)
                 return Key.ToString();
-            return $"{Key}{Alteration}";
+            return $"{Key}{Alteration.GetSymbol()}";
         }
     }
 }

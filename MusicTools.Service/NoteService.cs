@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using MusicTools.Domain;
 using MusicTools.Domain.Enum;
 using MusicTools.Domain.Exception;
@@ -8,30 +10,40 @@ namespace MusicTools.Service
 {
     public class NoteService : INoteService
     {
-        private readonly KeyService _keyService; 
+        private readonly IKeyService _keyService; 
 
-        public NoteService(KeyService keyService = null)
+        public NoteService(IKeyService keyService)
         {
-            _keyService = keyService ?? new KeyService(); 
+            _keyService = keyService; 
         }
 
-        public Note GetByInterval(Note startNote, IntervalNumber intervalNumber, IntervalQuality intervalQuality)
+        public IEnumerable<Note> GetAll()
         {
-            var targetKey = _keyService.GetByInterval(startNote.Key, intervalNumber);
+            foreach (var key in Enum.GetValues(typeof(Key)).Cast<Key>())
+            {
+                foreach (var alteration in Enum.GetValues(typeof(Alteration)).Cast<Alteration>())
+                {
+                    yield return new Note(key, alteration);
+                }
+            }
+        }
+
+        public Note GetByInterval(Note startNote, Interval interval)
+        {
+            var targetKey = _keyService.GetByIntervalNumber(startNote.Key, interval.Number);
             var halfStepCountBetweenStartNoteAndTargetKey = (_keyService.GetHalfStepCountBetweenTwoKey(startNote.Key, targetKey) - (int)startNote.Alteration);
-            var targetHalfStepCount = GetHalfStepCountFromInterval(intervalNumber, intervalQuality);
+            var targetHalfStepCount = GetHalfStepCountFromInterval(interval);
             var neededAlterationHalfStepCount = targetHalfStepCount - halfStepCountBetweenStartNoteAndTargetKey;
             var alteration = (Alteration)(neededAlterationHalfStepCount);
             return new Note(targetKey, alteration);
         }
 
-
-        private int GetHalfStepCountFromInterval(IntervalNumber intervalNumber, IntervalQuality intervalQuality)
+        private int GetHalfStepCountFromInterval(Interval interval)
         {
-            switch (intervalNumber)
+            switch (interval.Number)
             {
                 case IntervalNumber.Second:
-                    switch (intervalQuality)
+                    switch (interval.Quality)
                     {
                         case IntervalQuality.Major:
                             return 2;
@@ -42,12 +54,12 @@ namespace MusicTools.Service
                         case IntervalQuality.Diminished:
                             return 0;
                         case IntervalQuality.Perfect:
-                            throw new NotExistingIntervalException($"IntervalNumber {intervalNumber} {intervalQuality} does not exist");
+                            throw new NotExistingIntervalException($"Interval {interval.Number} {interval.Quality} does not exist");
                         default:
-                            throw new ArgumentOutOfRangeException(nameof(intervalQuality), intervalQuality, null);
+                            throw new ArgumentOutOfRangeException(nameof(interval.Number), interval.Quality, null);
                     }
                 case IntervalNumber.Third:
-                    switch (intervalQuality)
+                    switch (interval.Quality)
                     {
                         case IntervalQuality.Major:
                             return 4;
@@ -58,12 +70,12 @@ namespace MusicTools.Service
                         case IntervalQuality.Diminished:
                             return 2;
                         case IntervalQuality.Perfect:
-                            throw new NotExistingIntervalException($"IntervalNumber {intervalNumber} {intervalQuality} does not exist");
+                            throw new NotExistingIntervalException($"Interval {interval.Number} {interval.Quality} does not exist");
                         default:
-                            throw new ArgumentOutOfRangeException(nameof(intervalQuality), intervalQuality, null);
+                            throw new ArgumentOutOfRangeException(nameof(interval.Quality), interval.Quality, null);
                     }
                 case IntervalNumber.Fourth:
-                    switch (intervalQuality)
+                    switch (interval.Quality)
                     {
                         case IntervalQuality.Perfect:
                             return 5;
@@ -73,12 +85,12 @@ namespace MusicTools.Service
                             return 4;
                         case IntervalQuality.Major:
                         case IntervalQuality.Minor:
-                            throw new NotExistingIntervalException($"IntervalNumber {intervalNumber} {intervalQuality} does not exist");
+                            throw new NotExistingIntervalException($"Interval {interval.Number} {interval.Quality} does not exist");
                         default:
-                            throw new ArgumentOutOfRangeException(nameof(intervalQuality), intervalQuality, null);
+                            throw new ArgumentOutOfRangeException(nameof(interval.Quality), interval.Quality, null);
                     }
                 case IntervalNumber.Fifth:
-                    switch (intervalQuality)
+                    switch (interval.Quality)
                     {
                         case IntervalQuality.Perfect:
                             return 7;
@@ -88,12 +100,12 @@ namespace MusicTools.Service
                             return 6;
                         case IntervalQuality.Major:
                         case IntervalQuality.Minor:
-                            throw new NotExistingIntervalException($"IntervalNumber {intervalNumber} {intervalQuality} does not exist");
+                            throw new NotExistingIntervalException($"Interval {interval.Number} {interval.Quality} does not exist");
                         default:
-                            throw new ArgumentOutOfRangeException(nameof(intervalQuality), intervalQuality, null);
+                            throw new ArgumentOutOfRangeException(nameof(interval.Quality), interval.Quality, null);
                     }
                 case IntervalNumber.Sixth:
-                    switch (intervalQuality)
+                    switch (interval.Quality)
                     {
                         case IntervalQuality.Major:
                             return 9;
@@ -104,12 +116,12 @@ namespace MusicTools.Service
                         case IntervalQuality.Diminished:
                             return 7;
                         case IntervalQuality.Perfect:
-                            throw new NotExistingIntervalException($"IntervalNumber {intervalNumber} {intervalQuality} does not exist");
+                            throw new NotExistingIntervalException($"Interval {interval.Number} {interval.Quality} does not exist");
                         default:
-                            throw new ArgumentOutOfRangeException(nameof(intervalQuality), intervalQuality, null);
+                            throw new ArgumentOutOfRangeException(nameof(interval.Quality), interval.Quality, null);
                     }
                 case IntervalNumber.Seventh:
-                    switch (intervalQuality)
+                    switch (interval.Quality)
                     {
                         case IntervalQuality.Major:
                             return 11;
@@ -120,12 +132,12 @@ namespace MusicTools.Service
                         case IntervalQuality.Diminished:
                             return 9;
                         case IntervalQuality.Perfect:
-                            throw new NotExistingIntervalException($"IntervalNumber {intervalNumber} {intervalQuality} does not exist");
+                            throw new NotExistingIntervalException($"Interval {interval.Number} {interval.Quality} does not exist");
                         default:
-                            throw new ArgumentOutOfRangeException(nameof(intervalQuality), intervalQuality, null);
+                            throw new ArgumentOutOfRangeException(nameof(interval.Quality), interval.Quality, null);
                     }
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(intervalNumber), intervalNumber, null);
+                    throw new ArgumentOutOfRangeException(nameof(interval.Number), interval.Number, null);
             }
         }
     }

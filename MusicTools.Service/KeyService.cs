@@ -22,7 +22,7 @@ namespace MusicTools.Service
             return Enum.GetValues(typeof(Key)).Cast<Key>().OrderByDescending(k => (int)k).First(k => (int)k < (int)key);
         }
 
-        public Key GetByInterval(Key startKey, IntervalNumber intervalNumber)
+        public Key GetByIntervalNumber(Key startKey, IntervalNumber intervalNumber)
         {
             var outKey = startKey; 
             for (int i = 0; i < (int)intervalNumber; i++)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using MusicTools.Data;
 using MusicTools.Domain;
 using MusicTools.Service.Contracts;
@@ -10,24 +11,22 @@ namespace MusicTools.Service
     public class ChordQualityService : IChordQualityService
     {
         private readonly MusicToolsContext _context;
-        private readonly bool _shouldDisposeContext; 
 
-        public ChordQualityService(MusicToolsContext context = null)
+        public ChordQualityService(MusicToolsContext context)
         {
-            _context = context ?? new MusicToolsContext();
-            _shouldDisposeContext = context == null; 
+            _context = context;
         }
         public IEnumerable<ChordQuality> GetAll()
         {
-            return _context.ChordQualities;
+            return _context.ChordQualities.Include(cq => cq.ChordQualityIntervals).ThenInclude(cqi => cqi.Interval);
         }
 
-        ~ChordQualityService()
+        public ChordQuality Add(ChordQuality chordQuality)
         {
-            if (_shouldDisposeContext)
-            {
-                _context.Dispose();
-            }
+            _context.Database.EnsureCreated();
+            _context.Add(chordQuality);
+            _context.SaveChanges();
+            return chordQuality; 
         }
     }
 }

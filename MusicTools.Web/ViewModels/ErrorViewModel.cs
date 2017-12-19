@@ -1,6 +1,4 @@
-using System;
-
-namespace MusicTools.Web.Models
+namespace MusicTools.Web.ViewModels
 {
     public class ErrorViewModel
     {

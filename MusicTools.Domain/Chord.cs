@@ -16,6 +16,6 @@ namespace MusicTools.Domain
         public Note[] Notes { get; }
 
         public ChordType ChordType => (ChordType) (Notes.Length + 1);
-        public string Name => $"{Fundamental} {ChordQuality}";
+        public string Name => $"{Fundamental}{ChordQuality.Name}";
     }
 }

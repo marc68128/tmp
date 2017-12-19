@@ -12,7 +12,7 @@ namespace MusicTools.Service.UnitTest
         [SetUp]
         public void SetUp()
         {
-            _chordService = new ChordService();
+            //_chordService = new ChordService();
         }
 
         //[Test]

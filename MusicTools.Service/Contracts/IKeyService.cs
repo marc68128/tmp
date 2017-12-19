@@ -6,6 +6,7 @@ namespace MusicTools.Service.Contracts
     {
         Key GetNextKey(Key key);
         Key GetPreviousKey(Key key);
+        Key GetByIntervalNumber(Key startKey, IntervalNumber intervalNumber);
         int GetHalfStepCountBetweenTwoKey(Key k1, Key k2);
     }
 }
