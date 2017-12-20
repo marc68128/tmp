@@ -1,0 +1,25 @@
+﻿@using MusicTools.Domain.Utils
+@model MusicTools.Web.ViewModels.Chord.ChordViewModel
+
+<div class="chord-view">
+    <ul class="key-menu">
+        @foreach (var key in Model.Keys)
+        {
+            <li class="key-selector" data-key="@((int)key)">@key</li>
+        }
+    </ul>
+
+    <ul class="alteration-menu">
+        @foreach (var alteration in Model.Alterations.OrderBy(a => (int)a))
+        {
+            <li class="alteration-selector" data-alteration="@((int)alteration)">@alteration.GetSymbol()</li>
+        }
+    </ul>
+
+    <ul class="chord-quality-menu">
+        @foreach (var chordQuality in Model.ChordQualities)
+        {
+            <li class="chordQuality-selector" data-chordQuality="@chordQuality.Name">@chordQuality.Name</li>
+        }
+    </ul>
+</div>

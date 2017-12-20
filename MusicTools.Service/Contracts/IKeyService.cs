@@ -1,4 +1,5 @@
-﻿using MusicTools.Domain.Enum;
+﻿using System.Collections.Generic;
+using MusicTools.Domain.Enum;
 
 namespace MusicTools.Service.Contracts
 {
@@ -8,5 +9,6 @@ namespace MusicTools.Service.Contracts
         Key GetPreviousKey(Key key);
         Key GetByIntervalNumber(Key startKey, IntervalNumber intervalNumber);
         int GetHalfStepCountBetweenTwoKey(Key k1, Key k2);
+        IEnumerable<Key> GetAll();
     }
 }

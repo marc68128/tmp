@@ -1,14 +1,14 @@
 ﻿@model MusicTools.Web.ViewModels.HomeViewModel
 
-
-<div class="block note-block clearfix">
-    <h1>Notes :</h1>
-    @foreach (var note in Model.AllNotes.OrderBy(n => n.Key).ThenBy(n => (int)n.Key + n.Alteration))
-    {
-        <div class="note" data-key="@((int)note.Key)" data-alteration="@((int)note.Alteration)">
-            @note.ToString()
-        </div>
-    }
+<div class="pannel">
+    <div class="block note-block clearfix">
+        <h1>Notes</h1>
+        @foreach (var note in Model.AllNotes.OrderBy(n => n.Key).ThenBy(n => (int)n.Key + n.Alteration))
+        {
+            <div class="note" data-key="@((int)note.Key)" data-alteration="@((int)note.Alteration)">
+                @note.ToString()
+            </div>
+        }
+    </div>
 </div>
-
 

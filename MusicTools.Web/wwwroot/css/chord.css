@@ -1,0 +1,115 @@
+﻿.chord-block {
+    width: 48%;
+}
+
+.chord-view {
+    height: 100%;
+    width: 100%;
+    background-color: #6E84D6;
+}
+
+    .chord-view .key-menu, .chord-view .alteration-menu {
+        margin: 0;
+        padding: 0;
+        width: 30px;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translate(0,-50%);
+        -webkit-transform: translate(0,-50%);
+        transform: translate(0,-50%);
+    }
+
+    .chord-view .key-menu {
+        left: 0;
+    }
+
+    .chord-view .alteration-menu {
+        right: 11px;
+    }
+
+    .chord-view .chord-quality-menu {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        -ms-transform: translate(-50%, 0);
+        -webkit-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+    }
+
+    .chord-view .key-menu li {
+        -ms-border-bottom-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        -ms-border-top-right-radius: 10px;
+        border-top-right-radius: 10px;
+        border: 1px solid transparent;
+        border-left: none;
+    }
+
+    .chord-view .alteration-menu li {
+        -ms-border-bottom-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        -ms-border-top-left-radius: 10px;
+        border-top-left-radius: 10px;
+        border: 1px solid transparent;
+        border-left: none;
+    }
+
+    .chord-view .chord-quality-menu li {
+        -ms-border-bottom-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        -ms-border-bottom-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border: 1px solid transparent;
+        border-top: none;
+        float: left;
+        margin-top: 0;
+        background-color: #1435AD;
+        list-style: none;
+        height: 30px;
+        color: white;
+        text-align: center;
+        padding: 5px;
+        font-family: 'Lucida Console';
+        margin-right: 4px;
+        margin-left: 4px;
+    }
+
+    .chord-view .key-menu li, .chord-view .alteration-menu li {
+        background-color: #1435AD;
+        list-style: none;
+        height: 30px;
+        width: 30px;
+        line-height: 30px;
+        font-size: 20px;
+        color: white;
+        text-align: center;
+        padding: 5px;
+        font-family: 'Lucida Console';
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+
+        .chord-view .key-menu li.selected, .chord-view .alteration-menu li.selected, .chord-view .chord-quality-menu li.selected {
+            border: 1px solid white;
+            color: #6e84d6;
+        }
+
+        .chord-view .key-menu li:hover, .chord-view .alteration-menu li:hover, .chord-view .chord-quality-menu li:hover, 
+        .chord-view .key-menu li.selected, .chord-view .alteration-menu li.selected, .chord-view .chord-quality-menu li.selected {
+            cursor: pointer;
+            border: 1px solid white;
+        }
+
+            .chord-view .key-menu li:hover, .chord-view .key-menu li.selected {
+                border-left: none;
+            }
+
+        .chord-view .alteration-menu li:hover, .chord-view .alteration-menu li.selected {
+            border-right: none;
+        }
+
+    .chord-view .chord-quality-menu li:hover, .chord-view .chord-quality-menu li.selected {
+        border-top: none;
+    }

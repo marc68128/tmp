@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MusicTools.Domain;
+using MusicTools.Domain.Enum;
 using MusicTools.Service.Contracts;
 
 namespace MusicTools.Service

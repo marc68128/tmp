@@ -1,17 +1,14 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MusicTools.Data;
-using MusicTools.Service;
-using MusicTools.Service.Contracts;
 
-namespace MusicTools.Web
+namespace testVue
 {
     public class Startup
     {
@@ -26,14 +23,6 @@ namespace MusicTools.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
-            services.AddDbContext<MusicToolsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MusicToolsContext")));
-
-            services.AddScoped<IKeyService, KeyService>();
-            services.AddScoped<IAlterationService, AlterationService>();
-            services.AddScoped<INoteService, NoteService>();
-            services.AddScoped<IChordQualityService, ChordQualityService>();
-            services.AddScoped<IChordService, ChordService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,7 +31,10 @@ namespace MusicTools.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
+                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                {
+                    HotModuleReplacement = true
+                });
             }
             else
             {
@@ -56,8 +48,11 @@ namespace MusicTools.Web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-            });
 
+                routes.MapSpaFallbackRoute(
+                    name: "spa-fallback",
+                    defaults: new { controller = "Home", action = "Index" });
+            });
         }
     }
 }

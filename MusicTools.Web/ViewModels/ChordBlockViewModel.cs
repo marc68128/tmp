@@ -8,6 +8,6 @@ namespace MusicTools.Web.ViewModels
 {
     public class ChordBlockViewModel
     {
-        public List<Chord> Chords { get; set; }
+        public List<Domain.Chord> Chords { get; set; }
     }
 }

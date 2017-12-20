@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MusicTools.Domain.Enum;
 using MusicTools.Service.Contracts;
@@ -37,5 +38,9 @@ namespace MusicTools.Service
             return (12 + ((int)k2 - (int)k1)) % 12;
         }
 
+        public IEnumerable<Key> GetAll()
+        {
+            return Enum.GetValues(typeof(Key)).Cast<Key>();
+        }
     }
 }
