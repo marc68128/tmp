@@ -8,6 +8,7 @@ namespace MusicTools.Service.Contracts
     public interface IChordQualityService
     {
         IEnumerable<ChordQuality> GetAll();
+        ChordQuality GetByName(string name);
         ChordQuality Add(ChordQuality chordQuality);
     }
 }

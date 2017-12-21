@@ -2,6 +2,7 @@
 {
     public enum IntervalNumber
     {
+        Fundamental = 0,
         Second = 1, 
         Third,
         Fourth, 

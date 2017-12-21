@@ -12,7 +12,7 @@ namespace MusicTools.Service.UnitTest
         [SetUp]
         public void SetUp()
         {
-            _noteService = new NoteService(new KeyService());
+            _noteService = new NoteService(new KeyService(), new IntervalService());
         }
 
         [Test]

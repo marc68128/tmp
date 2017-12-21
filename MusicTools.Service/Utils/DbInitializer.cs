@@ -85,6 +85,18 @@ namespace MusicTools.Service.Utils
                     new ChordQualityInterval{IntervalId = intervals.First(i => i.Number == IntervalNumber.Fifth && i.Quality == IntervalQuality.Augmented).Id}
                 }},
 
+                new ChordQuality {Name = "7", ChordQualityIntervals = new List<ChordQualityInterval>
+                {
+                    new ChordQualityInterval{IntervalId = intervals.First(i => i.Number == IntervalNumber.Third && i.Quality == IntervalQuality.Major).Id},
+                    new ChordQualityInterval{IntervalId = intervals.First(i => i.Number == IntervalNumber.Fifth && i.Quality == IntervalQuality.Perfect).Id},
+                    new ChordQualityInterval{IntervalId = intervals.First(i => i.Number == IntervalNumber.Seventh && i.Quality == IntervalQuality.Minor).Id}
+                }},
+                new ChordQuality {Name = "Maj7", ChordQualityIntervals = new List<ChordQualityInterval>
+                {
+                    new ChordQualityInterval{IntervalId = intervals.First(i => i.Number == IntervalNumber.Third && i.Quality == IntervalQuality.Major).Id},
+                    new ChordQualityInterval{IntervalId = intervals.First(i => i.Number == IntervalNumber.Fifth && i.Quality == IntervalQuality.Perfect).Id},
+                    new ChordQualityInterval{IntervalId = intervals.First(i => i.Number == IntervalNumber.Seventh && i.Quality == IntervalQuality.Major).Id}
+                }},
                 new ChordQuality {Name = "Min7", ChordQualityIntervals = new List<ChordQualityInterval>
                 {
                     new ChordQualityInterval{IntervalId = intervals.First(i => i.Number == IntervalNumber.Third && i.Quality == IntervalQuality.Minor).Id},

@@ -35,7 +35,16 @@ namespace MusicTools.Service
 
         public int GetHalfStepCountBetweenTwoKey(Key k1, Key k2)
         {
-            return (12 + ((int)k2 - (int)k1)) % 12;
+            int key1 = (int) k1;
+            int key2 = (int) k2;
+
+            if (key2 < key1)
+            {
+                key2 += 12;
+            }
+
+            return key2 - key1;
+            //return (12 + ((int)k2 - (int)k1)) % 12;
         }
 
         public IEnumerable<Key> GetAll()

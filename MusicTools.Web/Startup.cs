@@ -30,6 +30,7 @@ namespace MusicTools.Web
             services.AddDbContext<MusicToolsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MusicToolsContext")));
 
             services.AddScoped<IKeyService, KeyService>();
+            services.AddScoped<IIntervalService, IntervalService>();
             services.AddScoped<IAlterationService, AlterationService>();
             services.AddScoped<INoteService, NoteService>();
             services.AddScoped<IChordQualityService, ChordQualityService>();

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using MusicTools.Domain;
-using MusicTools.Domain.Enum;
 
 namespace MusicTools.Service.Contracts
 {
@@ -8,5 +7,6 @@ namespace MusicTools.Service.Contracts
     {
         IEnumerable<Note> GetAll();
         Note GetByInterval(Note startNote, Interval interval);
+        int GetHalfStepCountBetween2Notes(Note note1, Note note2);
     }
 }

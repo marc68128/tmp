@@ -1,0 +1,16 @@
+﻿@model MusicTools.Web.ViewModels.Chord.ChordViewModel
+
+    
+<div class="chord">
+    <h1>@Model.Name</h1>
+    @foreach (var note in Model.Notes)
+    {
+        <div class="note">
+            <div class="interval">
+                @note.Interval.Number.ToString()<br />
+                @note.Interval.Quality.ToString()
+            </div>
+            @note.Note.ToString()
+        </div>
+    }
+</div>

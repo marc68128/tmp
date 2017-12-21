@@ -24,5 +24,11 @@ namespace MusicTools.Service
         {
             return chordQualities.Select(chordQuality => GetChord(fundamental, chordQuality));
         }
+
+        public IEnumerable<Chord> GetChords(Note n1, Note n2, Note n3)
+        {
+           
+            return null; 
+        }
     }
 }

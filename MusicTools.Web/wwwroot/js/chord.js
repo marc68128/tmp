@@ -31,7 +31,7 @@ function getChord() {
 
     $.get("Chord/GetChord", { key : selectedKey, alteration : selectedAlteration, chordQuality : selectedChordQuality })
         .done(function (data) {
-            $(".chord-block").remove();
-            $(".content").append(data);
+            $(".chord").remove();
+            $(".chord-view").append(data);
         });
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using MusicTools.Data;
@@ -19,6 +20,11 @@ namespace MusicTools.Service
         public IEnumerable<ChordQuality> GetAll()
         {
             return _context.ChordQualities.Include(cq => cq.ChordQualityIntervals).ThenInclude(cqi => cqi.Interval);
+        }
+
+        public ChordQuality GetByName(string name)
+        {
+            return GetAll().FirstOrDefault(cq => cq.Name == name);
         }
 
         public ChordQuality Add(ChordQuality chordQuality)
