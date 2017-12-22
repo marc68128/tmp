@@ -8,5 +8,7 @@ namespace MusicTools.Service.Contracts
         IEnumerable<Note> GetAll();
         Note GetByInterval(Note startNote, Interval interval);
         int GetHalfStepCountBetween2Notes(Note note1, Note note2);
+        IEnumerable<Note> GetByHalfStepCount(Note startNote, int halfStepCount);
+        IEnumerable<Interval> GetIntervalsBetween2Notes(Note note1, Note note2);
     }
 }

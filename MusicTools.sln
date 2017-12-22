@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicTools.Service.UnitTest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicTools.Web", "MusicTools.Web\MusicTools.Web.csproj", "{7543479C-31FB-4BAE-8CAE-3E4BD567336A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MusicTools.ConsoleApp", "MusicTools.ConsoleApp\MusicTools.ConsoleApp.csproj", "{E7E0BEE6-5921-49EC-8CB1-48260B80EB15}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{7543479C-31FB-4BAE-8CAE-3E4BD567336A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7543479C-31FB-4BAE-8CAE-3E4BD567336A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7543479C-31FB-4BAE-8CAE-3E4BD567336A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7E0BEE6-5921-49EC-8CB1-48260B80EB15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7E0BEE6-5921-49EC-8CB1-48260B80EB15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7E0BEE6-5921-49EC-8CB1-48260B80EB15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7E0BEE6-5921-49EC-8CB1-48260B80EB15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

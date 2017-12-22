@@ -92,5 +92,12 @@ namespace MusicTools.Service.UnitTest
             Assert.That(result.Alteration, Is.EqualTo(expectedAlteration));
         }
 
+        [TestCase(Key.C, Alteration.None, 4, Key.E, Alteration.None)]
+        public void Test_GetByHalfStepCount(Key inputKey, Alteration inputAlteration, int halfStepCount, Key expectedKey, Alteration expectedAlteration)
+        {
+            var res = _noteService.GetByHalfStepCount(new Note(inputKey, inputAlteration), halfStepCount); 
+
+        }
+
     }
 }

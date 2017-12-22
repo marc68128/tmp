@@ -11,5 +11,13 @@ namespace MusicTools.Domain
         public IntervalQuality Quality { get; set; }
 
         public ICollection<ChordQualityInterval> ChordQualityIntervals { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Interval;
+            if (other != null)
+                return this.Number == other.Number && this.Quality == other.Quality;
+            return base.Equals(obj);
+        }
     }
 }
