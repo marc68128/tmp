@@ -17,5 +17,18 @@ namespace MusicTools.Domain
 
         public ChordType ChordType => (ChordType) (Notes.Length + 1);
         public string Name => $"{Fundamental}{ChordQuality.Name}";
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as Chord;
+            if (other != null)
+                return this.Name == other.Name;
+            return base.Equals(obj);
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

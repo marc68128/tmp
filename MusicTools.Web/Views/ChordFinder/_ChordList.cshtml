@@ -1,0 +1,8 @@
+﻿@model List<MusicTools.Web.ViewModels.Chord.ChordViewModel>
+    
+<div class="chord-list">
+    @foreach (var chord in Model)
+    {
+        @Html.Partial("_Chord", chord)
+    }
+</div>

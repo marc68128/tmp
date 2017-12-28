@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using MusicTools.Data;
@@ -18,8 +19,13 @@ namespace MusicTools.ConsoleApp
             var chordService = new ChordService(new NoteService(new KeyService(), new IntervalService()),
                 new ChordQualityService(context));
 
-            var chords = chordService.GetChords(new Note(Key.C), new Note(Key.E, Alteration.Flat), new Note(Key.G)).ToList();
-            Console.WriteLine("Hello World!");
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            var chords = chordService.GetChords(new Note(Key.D), new Note(Key.A, Alteration.Flat), new Note(Key.C)).ToList();
+
+            Console.WriteLine($"{sw.ElapsedMilliseconds} ms");
+            Console.Read();
         }
     }
 }

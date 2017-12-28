@@ -114,7 +114,7 @@ namespace MusicTools.Service
 
         public IEnumerable<Interval> GetIntervalsFromHalfStepCount(int halfStepCount)
         {
-            switch (halfStepCount % 12)
+            switch ((halfStepCount + 12) % 12)
             {
                 case 0:
                     return new List<Interval>

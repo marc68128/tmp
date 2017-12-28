@@ -1,10 +1,10 @@
 ﻿.note-block {
-    width: 48%;
+    width: 98%;
 }
 
 .note-block .note {
     border: 1px solid transparent;
-    width: 12%;
+    width: 6%;
     float: left;
     margin: 1%;
     border-radius: 10px;

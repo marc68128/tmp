@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using MusicTools.Domain;
 using MusicTools.Domain.Enum;
 using MusicTools.Service.Contracts;
 using MusicTools.Web.ViewModels.Chord;
+using MusicTools.Web.ViewModels.ChordFinder;
 
 namespace MusicTools.Web.Controllers
 {
@@ -14,13 +16,15 @@ namespace MusicTools.Web.Controllers
         private readonly IAlterationService _alterationService;
         private readonly IChordQualityService _chordQualityService;
         private readonly IChordService _chordService;
+        private readonly INoteService _noteService;
 
-        public ChordController(IKeyService keyService, IAlterationService alterationService, IChordQualityService chordQualityService, IChordService chordService)
+        public ChordController(IKeyService keyService, IAlterationService alterationService, IChordQualityService chordQualityService, IChordService chordService, INoteService noteService)
         {
             _keyService = keyService;
             _alterationService = alterationService;
             _chordQualityService = chordQualityService;
             _chordService = chordService;
+            _noteService = noteService;
         }
         public IActionResult Index()
         {
@@ -46,7 +50,7 @@ namespace MusicTools.Web.Controllers
             });
             vm.Notes = vm.Notes.OrderBy(n => n.Interval.Number).ToList();
 
-            return PartialView("_Chord", vm); 
+            return PartialView("_Chord", vm);
         }
     }
 }

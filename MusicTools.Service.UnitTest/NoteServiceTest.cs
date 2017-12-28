@@ -1,4 +1,5 @@
-﻿using MusicTools.Domain;
+﻿using System.Linq;
+using MusicTools.Domain;
 using MusicTools.Domain.Enum;
 using NUnit.Framework;
 
@@ -98,6 +99,15 @@ namespace MusicTools.Service.UnitTest
             var res = _noteService.GetByHalfStepCount(new Note(inputKey, inputAlteration), halfStepCount); 
 
         }
+
+        [TestCase(Key.C, Alteration.Sharp, Key.D, Alteration.Flat)]
+        public void Test_GetEquivalentNote(Key inputKey, Alteration inputAlteration, Key expectedKey, Alteration expectedAlteration)
+        {
+            var res = _noteService.GetEquivalentNote(new Note(inputKey, inputAlteration));
+            Assert.Contains(new Note(expectedKey, expectedAlteration), res.ToList());
+        }
+
+        
 
     }
 }

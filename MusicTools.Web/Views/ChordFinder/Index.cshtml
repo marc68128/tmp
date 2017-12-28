@@ -1,0 +1,18 @@
+﻿@model MusicTools.Web.ViewModels.ChordFinder.ChordFinderViewModel
+
+<div class="chord-finder">
+    <div class="block note-block clearfix">
+        <h1>Notes</h1>
+        @foreach (var note in Model.AllNotes.OrderBy(n => n.Key).ThenBy(n => (int)n.Key + n.Alteration))
+        {
+            <div class="note" data-key="@((int)note.Key)" data-alteration="@((int)note.Alteration)" data-key-string="@note.Key">
+                @note.ToString()
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="~/js/chordFinder.js" asp-append-version="true"></script>
+}
