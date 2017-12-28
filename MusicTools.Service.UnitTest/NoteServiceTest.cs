@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using MusicTools.Domain;
 using MusicTools.Domain.Enum;
 using NUnit.Framework;
@@ -93,21 +94,42 @@ namespace MusicTools.Service.UnitTest
             Assert.That(result.Alteration, Is.EqualTo(expectedAlteration));
         }
 
-        [TestCase(Key.C, Alteration.None, 4, Key.E, Alteration.None)]
-        public void Test_GetByHalfStepCount(Key inputKey, Alteration inputAlteration, int halfStepCount, Key expectedKey, Alteration expectedAlteration)
+        [TestCaseSource(nameof(GetByHalfStepCountData))]
+        public void Test_GetByHalfStepCount(Note inputNote, int halfStepCount, Note expectedNote)
         {
-            var res = _noteService.GetByHalfStepCount(new Note(inputKey, inputAlteration), halfStepCount); 
-
+            var res = _noteService.GetByHalfStepCount(inputNote, halfStepCount);
+            Assert.Contains(expectedNote, res.ToList());
         }
 
-        [TestCase(Key.C, Alteration.Sharp, Key.D, Alteration.Flat)]
-        public void Test_GetEquivalentNote(Key inputKey, Alteration inputAlteration, Key expectedKey, Alteration expectedAlteration)
+
+        [TestCaseSource(nameof(GetEquivalentNoteData))]
+        public void Test_GetEquivalentNote(Note inputNote, Note expectedNote)
         {
-            var res = _noteService.GetEquivalentNote(new Note(inputKey, inputAlteration));
-            Assert.Contains(new Note(expectedKey, expectedAlteration), res.ToList());
+            var res = _noteService.GetEquivalentNote(inputNote);
+            Assert.Contains(expectedNote, res.ToList());
         }
 
-        
+        private static IEnumerable<TestCaseData> GetEquivalentNoteData
+        {
+            get
+            {
+                yield return new TestCaseData(new Note(Key.C, Alteration.Sharp), new Note(Key.D, Alteration.Flat));
+                yield return new TestCaseData(new Note(Key.E, Alteration.Sharp), new Note(Key.F));
+                yield return new TestCaseData(new Note(Key.C, Alteration.Flat), new Note(Key.B));
+                yield return new TestCaseData(new Note(Key.E), new Note(Key.F, Alteration.Flat));
+                yield return new TestCaseData(new Note(Key.B, Alteration.Sharp), new Note(Key.C));
+            }
+        }
+
+
+        private static IEnumerable<TestCaseData> GetByHalfStepCountData
+        {
+            get
+            {
+                yield return new TestCaseData(new Note(Key.C), 5,  new Note(Key.E, Alteration.Sharp));
+                yield return new TestCaseData(new Note(Key.C), 5, new Note(Key.F));
+            }
+        }
 
     }
 }
