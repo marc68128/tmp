@@ -2,19 +2,21 @@
 @model MusicTools.Web.ViewModels.Chord.ChordSelectorViewModel
 
 <div class="chord-view">
-    <ul class="key-menu">
+
+
+    <select class="key-menu">
         @foreach (var key in Model.Keys)
         {
-            <li class="key-selector" data-key="@((int)key)">@key</li>
+            <option class="key-selector" value="@((int) key)" data-key="@((int) key)">@key</option>
         }
-    </ul>
+    </select>
 
-    <ul class="alteration-menu">
+    <select class="alteration-menu">
         @foreach (var alteration in Model.Alterations.OrderBy(a => (int)a))
         {
-            <li class="alteration-selector" data-alteration="@((int)alteration)">@alteration.GetSymbol()</li>
+            <option class="alteration-selector" value="@((int) alteration)" data-alteration="@((int) alteration)">@alteration.GetSymbol()</option>
         }
-    </ul>
+    </select>
 
     <ul class="chord-quality-menu">
         @foreach (var chordQuality in Model.ChordQualities)
@@ -23,3 +25,23 @@
         }
     </ul>
 </div>
+
+@section Scripts
+    {
+    <script>
+        $(function () {
+
+            $('#key-menu').dropdown({
+                gutter: 5,
+                stack: false,
+                slidingIn: 100
+            });
+            //$('#alteration-menu').dropdown({
+            //    gutter: 5,
+            //    stack: false,
+            //    slidingIn: 100
+            //});
+
+        });
+    </script>
+}

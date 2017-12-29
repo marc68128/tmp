@@ -19,4 +19,8 @@
     <ProjectReference Include="..\MusicTools.Service\MusicTools.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
