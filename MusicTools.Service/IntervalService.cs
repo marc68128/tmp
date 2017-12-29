@@ -13,6 +13,22 @@ namespace MusicTools.Service
         {
             switch (interval.Number)
             {
+                case IntervalNumber.Fundamental:
+                    switch (interval.Quality)
+                    {
+                        case IntervalQuality.Perfect:
+                            return 0;
+                        case IntervalQuality.Augmented:
+                            return 1;
+                        case IntervalQuality.Diminished:
+                            return 11;
+                        case IntervalQuality.Major:
+                        case IntervalQuality.Minor:
+                            throw new NotExistingIntervalException(
+                                $"Interval {interval.Number} {interval.Quality} does not exist");
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(interval.Quality), interval.Quality, null);
+                    }
                 case IntervalNumber.Second:
                     switch (interval.Quality)
                     {
@@ -99,7 +115,7 @@ namespace MusicTools.Service
                         case IntervalQuality.Minor:
                             return 10;
                         case IntervalQuality.Augmented:
-                            return 12;
+                            return 0;
                         case IntervalQuality.Diminished:
                             return 9;
                         case IntervalQuality.Perfect:
@@ -150,6 +166,7 @@ namespace MusicTools.Service
                 case 5:
                     return new List<Interval>
                     {
+                        new Interval{Number = IntervalNumber.Third, Quality = IntervalQuality.Augmented},
                         new Interval{Number = IntervalNumber.Fourth, Quality = IntervalQuality.Perfect},
                         new Interval{Number = IntervalNumber.Sixth, Quality = IntervalQuality.Diminished}
                     };

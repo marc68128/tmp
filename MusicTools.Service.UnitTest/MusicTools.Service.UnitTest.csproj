@@ -16,4 +16,28 @@
     <ProjectReference Include="..\MusicTools.Service\MusicTools.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="TestData\Intervals\IntervalHalfStepCount.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Keys\HalfStepCountBetweenKeys.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Keys\KeyByIntervalNumber.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Notes\EquivalentNotes.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Notes\HalfStepCountBetweenTwoNotes.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Notes\NoteByHalfStep.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestData\Notes\NoteByInterval.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

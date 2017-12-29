@@ -1,4 +1,7 @@
-﻿using MusicTools.Domain.Enum;
+﻿using System;
+using System.Linq;
+using MusicTools.Domain.Enum;
+using MusicTools.Service.UnitTest.TestDataProvider.Keys;
 using NUnit.Framework;
 
 namespace MusicTools.Service.UnitTest
@@ -44,24 +47,27 @@ namespace MusicTools.Service.UnitTest
         }
 
 
-        [Test]
-        [TestCase(Key.C, Key.D, 2)]
-        [TestCase(Key.D, Key.E, 2)]
-        [TestCase(Key.E, Key.F, 1)]
-        [TestCase(Key.F, Key.G, 2)]
-        [TestCase(Key.G, Key.A, 2)]
-        [TestCase(Key.A, Key.B, 2)]
-        [TestCase(Key.B, Key.C, 1)]
-        [TestCase(Key.C, Key.A, 9)]
-        [TestCase(Key.C, Key.B, 11)]
-        [TestCase(Key.C, Key.C, 0)]
-        [TestCase(Key.C, Key.E, 4)]
-        [TestCase(Key.C, Key.F, 5)]
-        [TestCase(Key.C, Key.G, 7)]
-        public void Test_GetInterval(Key key1, Key key2, int expectedInterval)
+
+        [TestCaseSource(typeof(HalfStepCountBetweenKeysProvider), nameof(HalfStepCountBetweenKeysProvider.GetData))]
+        public void Test_GetHalfStepCountBetweenTwoKey(Key key1, Key key2, int expectedHalfStepCount)
         {
-            var interval = _keyService.GetHalfStepCountBetweenTwoKey(key1, key2); 
-            Assert.That(interval, Is.EqualTo(expectedInterval));
+            var halfStepCount = _keyService.GetHalfStepCountBetweenTwoKey(key1, key2); 
+            Assert.That(halfStepCount, Is.EqualTo(expectedHalfStepCount));
+        }
+
+        [TestCaseSource(typeof(KeyByIntervalNumberProvider), nameof(KeyByIntervalNumberProvider.GetData))]
+        public void Test_GetByIntervalNumber(Key inputKey, IntervalNumber interval, Key expectedKey)
+        {
+            var key = _keyService.GetByIntervalNumber(inputKey, interval); 
+            Assert.That(key, Is.EqualTo(expectedKey));
+        }
+
+        [Test]
+        public void Test_GetAll()
+        {
+            var all = _keyService.GetAll();
+            var expected = Enum.GetValues(typeof(Key)).Cast<Key>();
+            Assert.That(all, Is.EquivalentTo(expected));
         }
     }
 }

@@ -22,7 +22,6 @@ namespace MusicTools.Service
 
             return Enum.GetValues(typeof(Key)).Cast<Key>().OrderByDescending(k => (int)k).First(k => (int)k < (int)key);
         }
-
         public Key GetByIntervalNumber(Key startKey, IntervalNumber intervalNumber)
         {
             var outKey = startKey; 
@@ -32,13 +31,12 @@ namespace MusicTools.Service
             }
             return outKey; 
         }
-
         public int GetHalfStepCountBetweenTwoKey(Key k1, Key k2)
         {
             int key1 = (int) k1;
             int key2 = (int) k2;
 
-            if (key2 < key1)
+            if (key2 <= key1)
             {
                 key2 += 12;
             }

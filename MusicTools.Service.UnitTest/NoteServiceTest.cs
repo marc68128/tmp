@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MusicTools.Domain;
 using MusicTools.Domain.Enum;
+using MusicTools.Service.UnitTest.TestDataProvider.Notes;
 using NUnit.Framework;
 
 namespace MusicTools.Service.UnitTest
@@ -18,118 +20,49 @@ namespace MusicTools.Service.UnitTest
         }
 
         [Test]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.C, Alteration.Flat, Key.D, Alteration.DoubleFlat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.C, Alteration.None, Key.D, Alteration.Flat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.C, Alteration.Sharp, Key.D, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.D, Alteration.Flat, Key.E, Alteration.DoubleFlat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.D, Alteration.None, Key.E, Alteration.Flat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.D, Alteration.Sharp, Key.E, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.E, Alteration.Flat, Key.F, Alteration.Flat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.E, Alteration.None, Key.F, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.E, Alteration.Sharp, Key.F, Alteration.Sharp)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.F, Alteration.Flat, Key.G, Alteration.DoubleFlat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.F, Alteration.None, Key.G, Alteration.Flat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.F, Alteration.Sharp, Key.G, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.G, Alteration.Flat, Key.A, Alteration.DoubleFlat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.G, Alteration.None, Key.A, Alteration.Flat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.G, Alteration.Sharp, Key.A, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.A, Alteration.Flat, Key.B, Alteration.DoubleFlat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.A, Alteration.None, Key.B, Alteration.Flat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.A, Alteration.Sharp, Key.B, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.B, Alteration.Flat, Key.C, Alteration.Flat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.B, Alteration.None, Key.C, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Minor, Key.B, Alteration.Sharp, Key.C, Alteration.Sharp)]
-
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.C, Alteration.Flat, Key.D, Alteration.Flat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.C, Alteration.None, Key.D, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.C, Alteration.Sharp, Key.D, Alteration.Sharp)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.D, Alteration.Flat, Key.E, Alteration.Flat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.D, Alteration.None, Key.E, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.D, Alteration.Sharp, Key.E, Alteration.Sharp)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.E, Alteration.Flat, Key.F, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.E, Alteration.None, Key.F, Alteration.Sharp)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.E, Alteration.Sharp, Key.F, Alteration.DoubleSharp)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.F, Alteration.Flat, Key.G, Alteration.Flat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.F, Alteration.None, Key.G, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.F, Alteration.Sharp, Key.G, Alteration.Sharp)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.G, Alteration.Flat, Key.A, Alteration.Flat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.G, Alteration.None, Key.A, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.G, Alteration.Sharp, Key.A, Alteration.Sharp)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.A, Alteration.Flat, Key.B, Alteration.Flat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.A, Alteration.None, Key.B, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.A, Alteration.Sharp, Key.B, Alteration.Sharp)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.B, Alteration.Flat, Key.C, Alteration.None)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.B, Alteration.None, Key.C, Alteration.Sharp)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Major, Key.B, Alteration.Sharp, Key.C, Alteration.DoubleSharp)]
-
-        [TestCase(IntervalNumber.Second, IntervalQuality.Diminished, Key.C, Alteration.None, Key.D, Alteration.DoubleFlat)]
-        [TestCase(IntervalNumber.Second, IntervalQuality.Augmented, Key.B, Alteration.None, Key.C, Alteration.DoubleSharp)]
-
-        [TestCase(IntervalNumber.Third, IntervalQuality.Diminished, Key.A, Alteration.None, Key.C, Alteration.Flat)]
-        [TestCase(IntervalNumber.Third, IntervalQuality.Minor, Key.D, Alteration.None, Key.F, Alteration.None)]
-        [TestCase(IntervalNumber.Third, IntervalQuality.Major, Key.E, Alteration.Flat, Key.G, Alteration.None)]
-        [TestCase(IntervalNumber.Third, IntervalQuality.Augmented, Key.B, Alteration.Sharp, Key.D, Alteration.TripleSharp)]
-
-        [TestCase(IntervalNumber.Fourth, IntervalQuality.Diminished, Key.A, Alteration.None, Key.D, Alteration.Flat)]
-        [TestCase(IntervalNumber.Fourth, IntervalQuality.Perfect, Key.E, Alteration.Flat, Key.A, Alteration.Flat)]
-        [TestCase(IntervalNumber.Fourth, IntervalQuality.Augmented, Key.B, Alteration.Sharp, Key.E, Alteration.DoubleSharp)]
-
-        [TestCase(IntervalNumber.Fifth, IntervalQuality.Diminished, Key.A, Alteration.None, Key.E, Alteration.Flat)]
-        [TestCase(IntervalNumber.Fifth, IntervalQuality.Perfect, Key.E, Alteration.Flat, Key.B, Alteration.Flat)]
-        [TestCase(IntervalNumber.Fifth, IntervalQuality.Augmented, Key.B, Alteration.Sharp, Key.F, Alteration.TripleSharp)]
-
-        [TestCase(IntervalNumber.Sixth, IntervalQuality.Diminished, Key.A, Alteration.None, Key.F, Alteration.Flat)]
-        [TestCase(IntervalNumber.Sixth, IntervalQuality.Minor, Key.D, Alteration.None, Key.B, Alteration.Flat)]
-        [TestCase(IntervalNumber.Sixth, IntervalQuality.Major, Key.E, Alteration.Flat, Key.C, Alteration.None)]
-        [TestCase(IntervalNumber.Sixth, IntervalQuality.Augmented, Key.B, Alteration.Sharp, Key.G, Alteration.TripleSharp)]
-
-        [TestCase(IntervalNumber.Seventh, IntervalQuality.Diminished, Key.A, Alteration.None, Key.G, Alteration.Flat)]
-        [TestCase(IntervalNumber.Seventh, IntervalQuality.Minor, Key.D, Alteration.None, Key.C, Alteration.None)]
-        [TestCase(IntervalNumber.Seventh, IntervalQuality.Major, Key.E, Alteration.Flat, Key.D, Alteration.None)]
-        [TestCase(IntervalNumber.Seventh, IntervalQuality.Augmented, Key.B, Alteration.Sharp, Key.A, Alteration.TripleSharp)]
-        public void Test_GetByInterval(IntervalNumber intervalNumber, IntervalQuality intervalQuality, Key inputKey, Alteration inputAlteration, Key expectedKey, Alteration expectedAlteration)
+        public void Test_GetAll()
         {
-            var result = _noteService.GetByInterval(new Note(inputKey, inputAlteration), new Interval { Number = intervalNumber, Quality = intervalQuality });
-            Assert.That(result.Key, Is.EqualTo(expectedKey));
-            Assert.That(result.Alteration, Is.EqualTo(expectedAlteration));
+            var all = _noteService.GetAll();
+            var expected = 
+                from key in Enum.GetValues(typeof(Key)).Cast<Key>()
+                from alteration in Enum.GetValues(typeof(Alteration)).Cast<Alteration>()
+                select new Note(key, alteration);
+            Assert.That(all, Is.EquivalentTo(expected));
         }
 
-        [TestCaseSource(nameof(GetByHalfStepCountData))]
-        public void Test_GetByHalfStepCount(Note inputNote, int halfStepCount, Note expectedNote)
+        [TestCaseSource(typeof(NoteByIntervalProvider), nameof(NoteByIntervalProvider.GetData))]
+        public void Test_GetByInterval(Note inputNote, Interval interval, Note expectedNote)
+        {
+            var result = _noteService.GetByInterval(inputNote, interval);
+            Assert.That(result, Is.EqualTo(expectedNote));
+        }
+
+        [TestCaseSource(typeof(NoteByHalfStepProvider), nameof(NoteByHalfStepProvider.GetData))]
+        public void Test_GetByHalfStepCount(Note inputNote, int halfStepCount, IEnumerable<Note> expectedNotes)
         {
             var res = _noteService.GetByHalfStepCount(inputNote, halfStepCount);
-            Assert.Contains(expectedNote, res.ToList());
+            Assert.That(res, Is.EquivalentTo(expectedNotes));
         }
 
-
-        [TestCaseSource(nameof(GetEquivalentNoteData))]
+        [TestCaseSource(typeof(EquivalentNoteProvider), nameof(EquivalentNoteProvider.GetData))]
         public void Test_GetEquivalentNote(Note inputNote, Note expectedNote)
         {
             var res = _noteService.GetEquivalentNote(inputNote);
             Assert.Contains(expectedNote, res.ToList());
         }
 
-        private static IEnumerable<TestCaseData> GetEquivalentNoteData
+        [TestCaseSource(typeof(HalfStepCountBetweenTwoNotesProvider), nameof(HalfStepCountBetweenTwoNotesProvider.GetData))]
+        public void Test_GetHalfStepCountBetween2Notes(Note inputNote1, Note inputNote2, int expectedHalfStepCount)
         {
-            get
-            {
-                yield return new TestCaseData(new Note(Key.C, Alteration.Sharp), new Note(Key.D, Alteration.Flat));
-                yield return new TestCaseData(new Note(Key.E, Alteration.Sharp), new Note(Key.F));
-                yield return new TestCaseData(new Note(Key.C, Alteration.Flat), new Note(Key.B));
-                yield return new TestCaseData(new Note(Key.E), new Note(Key.F, Alteration.Flat));
-                yield return new TestCaseData(new Note(Key.B, Alteration.Sharp), new Note(Key.C));
-            }
+            var halfStepCount = _noteService.GetHalfStepCountBetween2Notes(inputNote1, inputNote2); 
+            Assert.That(halfStepCount, Is.EqualTo(expectedHalfStepCount));
         }
 
-
-        private static IEnumerable<TestCaseData> GetByHalfStepCountData
+        [TestCaseSource(typeof(NoteByIntervalProvider), nameof(NoteByIntervalProvider.GetData))]
+        public void Test_GetIntervalsBetween2Notes(Note inputNote1, Interval expectedInterval, Note inputNote2)
         {
-            get
-            {
-                yield return new TestCaseData(new Note(Key.C), 5,  new Note(Key.E, Alteration.Sharp));
-                yield return new TestCaseData(new Note(Key.C), 5, new Note(Key.F));
-            }
+            var interval = _noteService.GetIntervalsBetween2Notes(inputNote1, inputNote2); 
+            Assert.That(interval, Has.One.EqualTo(expectedInterval));
         }
-
     }
 }

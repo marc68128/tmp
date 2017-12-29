@@ -34,25 +34,21 @@ namespace MusicTools.Service
             var targetKey = _keyService.GetByIntervalNumber(startNote.Key, interval.Number);
             var halfStepCountBetweenStartNoteAndTargetKey = (_keyService.GetHalfStepCountBetweenTwoKey(startNote.Key, targetKey) - (int)startNote.Alteration);
             var targetHalfStepCount = _intervalService.GetHalfStepCountFromInterval(interval);
+
             var neededAlterationHalfStepCount = targetHalfStepCount - halfStepCountBetweenStartNoteAndTargetKey;
-            var alteration = (Alteration)(neededAlterationHalfStepCount);
+            if (neededAlterationHalfStepCount > 6)
+                neededAlterationHalfStepCount = -(12 - neededAlterationHalfStepCount);
+            if (neededAlterationHalfStepCount < -6)
+                neededAlterationHalfStepCount = 12 + neededAlterationHalfStepCount;
+
+            var alteration = (Alteration)neededAlterationHalfStepCount;
             return new Note(targetKey, alteration);
         }
 
         public IEnumerable<Note> GetByHalfStepCount(Note startNote, int halfStepCount)
         {
             var halfStepCountBetweenCAndTargetNote = (GetHalfStepCountBetween2Notes(new Note(Key.C), startNote) + halfStepCount) % 12;
-            var keys = _keyService.GetAll().Where(k => Math.Min(Math.Abs((int)k - halfStepCountBetweenCAndTargetNote), Math.Abs(Math.Abs((int)k - halfStepCountBetweenCAndTargetNote) - 12)) < 4).ToList();
-            foreach (var key in keys)
-            {
-                var halfStepCountBetweenStartNoteAndKey = _keyService.GetHalfStepCountBetweenTwoKey(startNote.Key, key) - (int)startNote.Alteration;
-                var neededAlterationHalfStepCount = halfStepCountBetweenCAndTargetNote - halfStepCountBetweenStartNoteAndKey;
-                if (Math.Abs(neededAlterationHalfStepCount) > 6)
-                    neededAlterationHalfStepCount = (neededAlterationHalfStepCount + 12) % 12;
-
-                var alteration = (Alteration)(neededAlterationHalfStepCount);
-                yield return new Note(key, alteration);
-            }
+            return GetByHalfStepCountFromC(halfStepCountBetweenCAndTargetNote);
         }
 
         public int GetHalfStepCountBetween2Notes(Note note1, Note note2)
@@ -72,7 +68,29 @@ namespace MusicTools.Service
         public IEnumerable<Note> GetEquivalentNote(Note note)
         {
             var halfSetpCount = GetHalfStepCountBetween2Notes(new Note(Key.C), note);
-            return GetByHalfStepCount(new Note(Key.C), halfSetpCount);
+            return GetByHalfStepCountFromC(halfSetpCount);
+        }
+
+        private IEnumerable<Note> GetByHalfStepCountFromC(int halfStepCount)
+        {
+            var halfStepCountBetweenCAndTargetNote = halfStepCount % 12;
+            var keys = _keyService.GetAll().Where(k => Math.Min(Math.Abs((int)k - halfStepCountBetweenCAndTargetNote), Math.Abs(Math.Abs((int)k - halfStepCountBetweenCAndTargetNote) - 12)) < 5).ToList();
+            foreach (var key in keys)
+            {
+                var halfStepCountBetweenStartNoteAndKey = _keyService.GetHalfStepCountBetweenTwoKey(Key.C, key);
+
+                var neededAlterationHalfStepCount = halfStepCountBetweenCAndTargetNote - halfStepCountBetweenStartNoteAndKey;
+                if (neededAlterationHalfStepCount > 6)
+                    neededAlterationHalfStepCount = -(12 - neededAlterationHalfStepCount);
+                if (neededAlterationHalfStepCount < -6)
+                    neededAlterationHalfStepCount = 12 + neededAlterationHalfStepCount;
+
+                if (Math.Abs(neededAlterationHalfStepCount) <= 3)
+                {
+                    var alteration = (Alteration)(neededAlterationHalfStepCount);
+                    yield return new Note(key, alteration);
+                }
+            }
         }
     }
 }

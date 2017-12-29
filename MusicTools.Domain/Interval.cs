@@ -19,5 +19,10 @@ namespace MusicTools.Domain
                 return this.Number == other.Number && this.Quality == other.Quality;
             return base.Equals(obj);
         }
+
+        public override string ToString()
+        {
+            return $"{Number} {Quality}";
+        }
     }
 }

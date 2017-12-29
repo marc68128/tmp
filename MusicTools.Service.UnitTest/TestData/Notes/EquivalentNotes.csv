@@ -1,0 +1,12 @@
+C;None;B;Sharp;D;DoubleFlat;A;TripleSharp;;
+C;Sharp;D;Flat;B;DoubleSharp;E;TripleFlat;;
+D;None;E;DoubleFlat;C;DoubleSharp;F;TripleFlat;B;TripleSharp
+D;Sharp;E;Flat;F;DoubleFlat;C;TripleSharp;;
+E;None;F;Flat;D;DoubleSharp;G;TripleFlat;;
+F;None;E;Sharp;G;DoubleFlat;D;TripleSharp;;
+F;Sharp;G;Flat;E;DoubleSharp;A;TripleFlat;;
+G;None;A;DoubleFlat;F;DoubleSharp;E;TripleSharp;;
+G;Sharp;A;Flat;B;TripleFlat;F;TripleSharp;;
+A;None;B;DoubleFlat;G;DoubleSharp;C;TripleFlat;;
+A;Sharp;B;Flat;C;DoubleFlat;G;TripleSharp;;
+B;None;C;Flat;A;DoubleSharp;D;TripleFlat;;
