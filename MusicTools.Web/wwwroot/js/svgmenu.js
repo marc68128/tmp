@@ -6,7 +6,7 @@
     }
 
     SVGMenu.prototype.init = function () {
-        this.trigger = this.el.querySelector('button.menu__handle');
+        this.trigger = this.el.querySelector('button.menu-handle');
         this.shapeEl = this.el.querySelector('div.morph-shape');
 
         var s = Snap(this.shapeEl.querySelector('svg'));
@@ -30,12 +30,12 @@
         var self = this;
 
         if (this.isOpen) {
-            classie.remove(self.el, 'menu--anim');
-            setTimeout(function () { classie.remove(self.el, 'menu--open'); }, 250);
+            classie.remove(self.el, 'menu-anim');
+            setTimeout(function () { classie.remove(self.el, 'menu-open'); }, 250);
         }
         else {
-            classie.add(self.el, 'menu--anim');
-            setTimeout(function () { classie.add(self.el, 'menu--open'); }, 250);
+            classie.add(self.el, 'menu-anim');
+            setTimeout(function () { classie.add(self.el, 'menu-open'); }, 250);
         }
         this.pathEl.stop().animate({ 'path': this.isOpen ? this.paths.close : this.paths.open }, 350, mina.easeout, function () {
             self.pathEl.stop().animate({ 'path': self.paths.reset }, 800, mina.elastic);

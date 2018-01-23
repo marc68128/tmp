@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MusicTools.Data\MusicTools.Data.csproj" />
+    <ProjectReference Include="..\MusicTools.Domain\MusicTools.Domain.csproj" />
+    <ProjectReference Include="..\MusicTools.Service\MusicTools.Service.csproj" />
+  </ItemGroup>
+
+</Project>

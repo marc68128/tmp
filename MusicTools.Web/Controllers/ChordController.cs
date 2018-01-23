@@ -1,56 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using MusicTools.Domain;
+﻿using Microsoft.AspNetCore.Mvc;
+using MusicTools.Business;
 using MusicTools.Domain.Enum;
-using MusicTools.Service.Contracts;
-using MusicTools.Web.ViewModels.Chord;
-using MusicTools.Web.ViewModels.ChordFinder;
 
 namespace MusicTools.Web.Controllers
 {
+    [Route("api/[controller]")]
     public class ChordController : Controller
     {
-        private readonly IKeyService _keyService;
-        private readonly IAlterationService _alterationService;
-        private readonly IChordQualityService _chordQualityService;
-        private readonly IChordService _chordService;
-        private readonly INoteService _noteService;
+        private readonly ChordBusiness _chordBusiness;
 
-        public ChordController(IKeyService keyService, IAlterationService alterationService, IChordQualityService chordQualityService, IChordService chordService, INoteService noteService)
+        public ChordController(ChordBusiness chordBusiness)
         {
-            _keyService = keyService;
-            _alterationService = alterationService;
-            _chordQualityService = chordQualityService;
-            _chordService = chordService;
-            _noteService = noteService;
+            _chordBusiness = chordBusiness;
         }
-        public IActionResult Index()
+        public JsonResult Index()
         {
-            var chordViewModel = new ChordSelectorViewModel();
-            chordViewModel.Keys = _keyService.GetAll();
-            chordViewModel.Alterations = _alterationService.GetAllAvailableForChord();
-            chordViewModel.ChordQualities = _chordQualityService.GetAll();
-            return View(chordViewModel);
+            var viewModel = _chordBusiness.GetChordSelectorViewModel();
+            return Json(viewModel);
         }
 
-        public IActionResult GetChord(Key key, Alteration alteration, string chordQuality)
+        [HttpGet]
+        public JsonResult GetChord(Key key, Alteration alteration, string chordQuality)
         {
-            var dbChordQuality = _chordQualityService.GetByName(chordQuality);
-            var chord = _chordService.GetChord(new Note(key, alteration), dbChordQuality);
+            var viewModel = _chordBusiness.GetChordViewModel(key, alteration, chordQuality);
+            return Json(viewModel);
+        }
 
-            var vm = new ChordViewModel();
-            vm.Name = chord.Name;
-            vm.Notes = chord.Notes.Select((n, i) => new NoteViewModel { Note = n, Interval = dbChordQuality.ChordQualityIntervals.ElementAt(i).Interval }).ToList();
-            vm.Notes.Add(new NoteViewModel
-            {
-                Interval = new Interval { Number = IntervalNumber.Fundamental, Quality = IntervalQuality.Perfect },
-                Note = chord.Fundamental
-            });
-            vm.Notes = vm.Notes.OrderBy(n => n.Interval.Number).ToList();
-
-            return PartialView("_Chord", vm);
+        [HttpGet]
+        public JsonResult GetChords(Key key1, Alteration alteration1, Key key2, Alteration alteration2, Key key3, Alteration alteration3)
+        {
+            var viewModel = _chordBusiness.GetChordsViewModels(key1, alteration1, key2, alteration2, key3, alteration3);
+            return Json(viewModel);
         }
     }
 }

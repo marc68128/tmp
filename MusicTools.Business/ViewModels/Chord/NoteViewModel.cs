@@ -1,6 +1,6 @@
 ﻿using MusicTools.Domain;
 
-namespace MusicTools.Web.ViewModels.Chord
+namespace MusicTools.Business.ViewModels.Chord
 {
     public class NoteViewModel
     {

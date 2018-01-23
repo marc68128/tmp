@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MusicTools.Business;
 using MusicTools.Data;
 using MusicTools.Service;
 using MusicTools.Service.Contracts;
@@ -35,6 +36,10 @@ namespace MusicTools.Web
             services.AddScoped<INoteService, NoteService>();
             services.AddScoped<IChordQualityService, ChordQualityService>();
             services.AddScoped<IChordService, ChordService>();
+
+            services.AddScoped<KeyBusiness, KeyBusiness>();
+            services.AddScoped<IntervalBusiness, IntervalBusiness>();
+            services.AddScoped<ChordBusiness, ChordBusiness>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

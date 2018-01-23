@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MusicTools.Business\MusicTools.Business.csproj" />
     <ProjectReference Include="..\MusicTools.Data\MusicTools.Data.csproj" />
     <ProjectReference Include="..\MusicTools.Domain\MusicTools.Domain.csproj" />
     <ProjectReference Include="..\MusicTools.Service\MusicTools.Service.csproj" />

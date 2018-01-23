@@ -2,11 +2,11 @@
 using MusicTools.Domain;
 using MusicTools.Domain.Enum;
 
-namespace MusicTools.Web.ViewModels.Chord
+namespace MusicTools.Business.ViewModels.Chord
 {
     public class ChordSelectorViewModel
     {
-        public IEnumerable<Key> Keys { get; set; }
+        public IEnumerable<Domain.Enum.Key> Keys { get; set; }
         public IEnumerable<Alteration> Alterations { get; set; }
         public IEnumerable<ChordQuality> ChordQualities { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MusicTools.Domain;
 using MusicTools.Domain.Enum;
 using MusicTools.Domain.Exception;
@@ -9,6 +10,15 @@ namespace MusicTools.Service
 {
     public class IntervalService : IIntervalService
     {
+        public IEnumerable<IntervalNumber> GetAllIntervalNumbers()
+        {
+            return Enum.GetValues(typeof(IntervalNumber)).Cast<IntervalNumber>();
+        }
+        public IEnumerable<IntervalQuality> GetAllIntervalQualities()
+        {
+            return Enum.GetValues(typeof(IntervalQuality)).Cast<IntervalQuality>();
+        }
+
         public int GetHalfStepCountFromInterval(Interval interval)
         {
             switch (interval.Number)

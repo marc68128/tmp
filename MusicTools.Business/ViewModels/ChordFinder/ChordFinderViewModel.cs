@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MusicTools.Domain;
 
-namespace MusicTools.Web.ViewModels.ChordFinder
+namespace MusicTools.Business.ViewModels.ChordFinder
 {
     public class ChordFinderViewModel
     {
